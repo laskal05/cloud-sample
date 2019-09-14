@@ -3,13 +3,10 @@ const AmazonCognitoIdentity = require("amazon-cognito-identity-js");
 const config = require("./config");
 
 /* Create object for User Pool */
-const userData = {
-  Username: config.username,
-  Pool: new AmazonCognitoIdentity.CognitoUserPool({
-    UserPoolId: config.UserPoolId
-    ClientId: config.ClientId
-  });
-};
+const userPool = new AmazonCognitoIdentity.CognitoUserPool({
+  UserPoolId: config.poolData.UserPoolId,
+  ClientId: config.poolData.ClientId
+});
 
 /* Create Attribute */
 let attributeList = [];
@@ -28,11 +25,17 @@ attributeList.push(
 );
 
 /* Signup */
-userPool.signUp(config.username, config.password, attributeList, null, (err, result) => {
-  if (err) {
-    console.error(err);
-    return;
+userPool.signUp(
+  config.username,
+  config.password,
+  attributeList,
+  null,
+  (err, result) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    const cognitoUser = result.user;
+    console.log("user name is " + cognitoUser.getUsername());
   }
-  const cognitoUser = result.user;
-  console.log("user name is " + cognitoUser.getUsername());
-});
+);
