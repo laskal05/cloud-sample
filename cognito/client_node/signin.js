@@ -19,8 +19,8 @@ const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(
 const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
 cognitoUser.authenticateUser(authenticationDetails, {
   onSuccess: function(result) {
-    var accessToken = result.getAccessToken().getJwtToken();
-    console.log(accessToken);
+    // var accessToken = result.getAccessToken().getJwtToken();
+    console.log(result);
   },
 
   onFailure: function(err) {
