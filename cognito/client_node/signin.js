@@ -1,6 +1,7 @@
 global.fetch = require("node-fetch");
 const AmazonCognitoIdentity = require("amazon-cognito-identity-js");
-const config = require("./config");
+const { paid, free } = require("./config");
+const config = process.env.MEMBER === "paid" ? paid : free;
 
 const userPool = new AmazonCognitoIdentity.CognitoUserPool(config.poolData);
 const userData = {
