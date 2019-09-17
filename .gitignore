@@ -1,3 +1,6 @@
 config.json
 node_modules
 .DS_Store
+
+cloud-storage/config.json
+cloud-storage/secrets/*
